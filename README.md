@@ -179,3 +179,31 @@ p:=person{"飞雪无情",30}
 
 工厂函数
 工厂函数一般用于创建自定义的结构体，便于使用者调用，我们还是以 person 类型为例，用如下代码进行定义：
+
+
+协程（Goroutine）
+Go 语言中没有线程的概念，只有协程，也称为 goroutine。相比线程来说，协程更加轻量，一个程序可以随意启动成千上万个 goroutine。
+go function()
+
+Channel
+那么如果启动了多个 goroutine，它们之间该如何通信呢？这就是 Go 语言提供的 channel（通道）要解决的问题。
+声明一个 channel
+在 Go 语言中，声明一个 channel 非常简单，使用内置的 make 函数即可，如下所示：
+
+ch:=make(chan string)
+其中 chan 是一个关键字，表示是 channel 类型。后面的 string 表示 channel 里的数据是 string 类型。通过 channel 的声明也可以看到，chan 是一个集合类型。
+
+定义好 chan 后就可以使用了，一个 chan 的操作只有两种：发送和接收。
+
+接收：获取 chan 中的值，操作符为 <- chan。
+
+发送：向 chan 发送值，把值放在 chan 中，操作符为 chan <-。
+
+小技巧：这里注意发送和接收的操作符，都是 <- ，只不过位置不同。接收的 <- 操作符在 chan 的左侧，发送的 <- 操作符在 chan 的右侧。
+
+有缓冲 channel
+有缓冲 channel 类似一个可阻塞的队列，内部的元素先进先出。通过 make 函数的第二个参数可以指定 channel 容量的大小，进而创建一个有缓冲 channel，如下面的代码所示：
+
+cacheCh:=make(chan int,5)
+
+数据流动、传递的场景中要优先使用channel，它是并发安全的，性能也不错。
