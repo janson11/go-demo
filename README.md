@@ -207,3 +207,7 @@ ch:=make(chan string)
 cacheCh:=make(chan int,5)
 
 数据流动、传递的场景中要优先使用channel，它是并发安全的，性能也不错。
+
+channel 为什么是并发安全的呢？是因为 channel 内部使用了互斥锁来保证并发的安全
+
+小技巧：使用 go build、go run、go test 这些 Go 语言工具链提供的命令时，添加 -race 标识可以帮你检查 Go 语言代码是否存在资源竞争。
